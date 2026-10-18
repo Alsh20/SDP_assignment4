@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M1,1 L11,6 L1,11 Z" fill="#405F73"/>
+    </marker>
+    <style>
+      .bg { fill: #F4F7FA; }
+      .box { fill: #FFFFFF; stroke: #527184; stroke-width: 3; rx: 14; }
+      .head { fill: #E7F0F5; }
+      .facade { fill: #F5E8C7; }
+      .title { font: 700 36px 'Segoe UI', sans-serif; fill: #163244; }
+      .subtitle { font: 18px 'Segoe UI', sans-serif; fill: #526A78; }
+      .name { font: 700 23px 'Segoe UI', sans-serif; fill: #163244; }
+      .body { font: 18px 'Segoe UI', sans-serif; fill: #354F5E; }
+      .small { font: 16px 'Segoe UI', sans-serif; fill: #526A78; }
+      .line { fill: none; stroke: #405F73; stroke-width: 3; marker-end: url(#arrow); }
+      .dashed { fill: none; stroke: #6F8391; stroke-width: 2.5; stroke-dasharray: 9 7; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1600" height="900" class="bg"/>
+  <text x="64" y="62" class="title">Online Order Processing Facade</text>
+  <text x="64" y="96" class="subtitle">One client call coordinates four services; a declined payment releases reserved stock.</text>
+
+  <path d="M470 270 L590 270" class="line"/>
+  <path d="M1040 270 L1170 270" class="dashed"/>
+  <path d="M815 400 L815 500 L200 500 L200 615" class="line"/>
+  <path d="M815 500 L600 500 L600 615" class="line"/>
+  <path d="M815 500 L1000 500 L1000 615" class="line"/>
+  <path d="M815 500 L1400 500 L1400 615" class="line"/>
+
+  <rect x="64" y="190" width="406" height="160" class="box"/>
+  <path d="M78 190 H456 Q470 190 470 204 V238 H64 V204 Q64 190 78 190" class="head"/>
+  <text x="88" y="224" class="name">DemoClient</text>
+  <text x="88" y="277" class="body">Builds a Cart and calls placeOrder</text>
+  <text x="88" y="313" class="body">Does not call service classes</text>
+
+  <rect x="590" y="150" width="450" height="250" class="box"/>
+  <path d="M604 150 H1026 Q1040 150 1040 164 V198 H590 V164 Q590 150 604 150" class="facade"/>
+  <text x="614" y="184" class="name">OrderFacade</text>
+  <text x="614" y="242" class="body">+ placeOrder(customer, payment, cart)</text>
+  <text x="614" y="282" class="body">1. reserve stock  2. charge payment</text>
+  <text x="614" y="318" class="body">3. schedule delivery  4. notify customer</text>
+  <text x="614" y="365" class="small">Releases stock if payment is declined</text>
+
+  <rect x="1170" y="190" width="366" height="160" class="box"/>
+  <path d="M1184 190 H1522 Q1536 190 1536 204 V238 H1170 V204 Q1170 190 1184 190" class="head"/>
+  <text x="1194" y="224" class="name">OrderReceipt</text>
+  <text x="1194" y="277" class="body">Order ID, payment reference,</text>
+  <text x="1194" y="313" class="body">tracking number, and total</text>
+
+  <rect x="50" y="615" width="300" height="210" class="box"/>
+  <path d="M64 615 H336 Q350 615 350 629 V670 H50 V629 Q50 615 64 615" class="head"/>
+  <text x="74" y="651" class="name">InventoryService</text>
+  <text x="74" y="716" class="body">Checks quantities and price</text>
+  <text x="74" y="752" class="body">Reserves or releases stock</text>
+  <text x="74" y="797" class="small">No facade dependency</text>
+
+  <rect x="450" y="615" width="300" height="210" class="box"/>
+  <path d="M464 615 H736 Q750 615 750 629 V670 H450 V629 Q450 615 464 615" class="head"/>
+  <text x="474" y="651" class="name">PaymentProcessor</text>
+  <text x="474" y="716" class="body">Approves or declines payment</text>
+  <text x="474" y="752" class="body">Returns a transaction reference</text>
+  <text x="474" y="797" class="small">No facade dependency</text>
+
+  <rect x="850" y="615" width="300" height="210" class="box"/>
+  <path d="M864 615 H1136 Q1150 615 1150 629 V670 H850 V629 Q850 615 864 615" class="head"/>
+  <text x="874" y="651" class="name">ShippingService</text>
+  <text x="874" y="716" class="body">Schedules accepted order</text>
+  <text x="874" y="752" class="body">Returns tracking number</text>
+  <text x="874" y="797" class="small">No facade dependency</text>
+
+  <rect x="1250" y="615" width="300" height="210" class="box"/>
+  <path d="M1264 615 H1536 Q1550 615 1550 629 V670 H1250 V629 Q1250 615 1264 615" class="head"/>
+  <text x="1274" y="651" class="name">NotificationService</text>
+  <text x="1274" y="716" class="body">Sends order confirmation</text>
+  <text x="1274" y="752" class="body">to the customer</text>
+  <text x="1274" y="797" class="small">No facade dependency</text>
+
+  <text x="64" y="870" class="small">Solid arrows: facade coordination  |  Dashed arrow: result returned to the client</text>
+</svg>

@@ -1,0 +1,46 @@
+@startuml
+title Online Order Processing Facade
+left to right direction
+skinparam classAttributeIconSize 0
+
+class DemoClient {
+  +main(args: String[]): void
+}
+
+class OrderFacade {
+  +placeOrder(customerName: String, paymentMethod: String, cart: Cart): OrderReceipt
+}
+
+class InventoryService {
+  +reserve(cart: Cart): Reservation
+  +release(reservation: Reservation): void
+}
+class PaymentProcessor {
+  +charge(method: String, totalCents: int): String
+}
+class ShippingService {
+  +scheduleDelivery(customerName: String, cart: Cart): String
+}
+class NotificationService {
+  +sendOrderConfirmation(customerName: String, orderId: String): void
+}
+
+class Cart <<record>>
+class Reservation <<record>>
+class OrderReceipt <<record>>
+
+DemoClient --> OrderFacade : placeOrder(...)
+OrderFacade *--> InventoryService
+OrderFacade *--> PaymentProcessor
+OrderFacade *--> ShippingService
+OrderFacade *--> NotificationService
+OrderFacade ..> OrderReceipt : returns
+InventoryService ..> Cart
+InventoryService ..> Reservation : creates
+ShippingService ..> Cart
+
+note bottom of OrderFacade
+  Payment decline -> release reservation -> return error
+  Subsystems have no reference back to the facade.
+end note
+@enduml
